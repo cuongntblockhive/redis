@@ -13,7 +13,8 @@
 		"seed": "node ./seeds/seed.js",
 		"worker": "ts-node-dev ./worker/index.ts",
 		"cli": "node cli/index.js",
-		"sandbox": "ts-node-dev -T ./sandbox/index.ts"
+		"sandbox": "ts-node-dev -T ./sandbox/index.ts",
+		"genid": "ts-node-dev -T ./src/services/utils/gen-id.ts"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^1.0.0-next.17",
