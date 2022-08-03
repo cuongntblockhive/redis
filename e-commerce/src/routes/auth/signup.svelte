@@ -14,7 +14,7 @@
 		if (err) {
 			return;
 		}
-
+		console.log("data",_data)
 		const [data] = await f('/sessions');
 		session.set(data);
 

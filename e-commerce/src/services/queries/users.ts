@@ -26,6 +26,7 @@ const serialize = (attrs: CreateUserAttrs) => {
 const deserialize = (id: string, attrs: { [x: string]: string }) => {
 	return {
 		id,
-		...attrs
+		username: attrs.username,
+		password: attrs.password
 	}
 }
