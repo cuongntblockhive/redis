@@ -1,18 +1,11 @@
-import type { DateTime } from 'luxon';
-
-export interface Bid {
-	createdAt: DateTime;
-	amount: number;
-}
-
 export interface Item {
 	id: string;
 	name: string;
 	ownerId: string;
 	imageUrl: string;
 	description: string;
-	createdAt: DateTime;
-	endingAt: DateTime;
+	createdAt: number;
+	endingAt: number;
 	views: number;
 	likes: number;
 	price: number;
@@ -24,15 +17,7 @@ export interface CreateItemAttrs {
 	name: string;
 	imageUrl: string;
 	description: string;
-	createdAt: DateTime;
-	endingAt: DateTime;
-	ownerId: string;
-	highestBidUserId: string;
-	status: string;
-	price: number;
-	views: number;
-	likes: number;
-	bids: number;
+	duration: number;
 }
 
 export interface User {
@@ -50,8 +35,8 @@ export interface CreateBidAttrs {
 	itemId: string;
 	userId: string;
 	amount: number;
-	createdAt: DateTime;
-	itemEndingAt: DateTime;
+	createdAt: number;
+	itemEndingAt: number;
 }
 
 export interface Session {

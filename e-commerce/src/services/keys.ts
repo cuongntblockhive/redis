@@ -1,8 +1,3 @@
-const pageCacheKey = (id: string) => `pagecache#${id}`;
-const userKey = (id:string) => `user#${id}`;
-const sessionKey = (id: string) => `session#${id}`
-export {
-    pageCacheKey,
-    userKey,
-    sessionKey
-}
+export const pageCacheKey = (id: string) => `pagecache#${id}`;
+export const usersKey = (userId: string) => `users#${userId}`;
+export const sessionsKey = (sessionId: string) => `sessions#${sessionId}`;

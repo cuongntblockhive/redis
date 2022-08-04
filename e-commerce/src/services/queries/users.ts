@@ -1,31 +1,35 @@
 import type { CreateUserAttrs } from '$services/types';
 import { genId } from '$services/utils';
-import { userKey } from "$services/keys";
-import { client } from "$services/redis/client";
+import { client } from '$services/redis';
+import { usersKey } from '$services/keys';
 
-export const getUserByUsername = async (username: string) => { };
+export const getUserByUsername = async (username: string) => {};
 
 export const getUserById = async (id: string) => {
-	const res = await client.HGETALL(userKey(id))
-	return deserialize(id, res)
+	const user = await client.hGetAll(usersKey(id));
+
+	return deserialize(id, user);
 };
 
 export const createUser = async (attrs: CreateUserAttrs) => {
-	const id = genId()
-	await client.HSET(userKey(id), serialize(attrs))
-	return id
+	const id = genId();
+
+	await client.hSet(usersKey(id), serialize(attrs));
+
+	return id;
 };
 
-const serialize = (attrs: CreateUserAttrs) => {
+const serialize = (user: CreateUserAttrs) => {
 	return {
-		username: attrs.username,
-		password: attrs.password
-	}
-}
+		username: user.username,
+		password: user.password
+	};
+};
 
-const deserialize = (id: string, attrs: { [x: string]: string }) => {
+const deserialize = (id: string, user: { [key: string]: string }) => {
 	return {
 		id,
-		...attrs
-	}
-}
+		username: user.username,
+		password: user.password
+	};
+};
