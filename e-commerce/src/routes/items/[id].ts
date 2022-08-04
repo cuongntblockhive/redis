@@ -10,7 +10,7 @@ interface Params {
 
 export const get: RequestHandler<Params, any> = async ({ params, locals }) => {
 	const item = await getItem(params.id);
-
+	
 	if (!item) {
 		return {
 			status: 404,
@@ -24,9 +24,7 @@ export const get: RequestHandler<Params, any> = async ({ params, locals }) => {
 	const userLikes = await userLikesItem(item.id, locals.session.userId);
 	const history = await getBidHistory(item.id);
 	const similarItems = await getSimilarItems(item.id);
-
 	const userHasHighBid = item.highestBidUserId === locals.session.userId;
-
 	return {
 		body: { item, userLikes, userHasHighBid, history, similarItems }
 	};
