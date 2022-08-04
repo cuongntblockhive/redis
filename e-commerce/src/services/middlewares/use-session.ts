@@ -8,9 +8,8 @@ import { getSession, saveSession } from '$services/queries/sessions';
 const keys = new keygrip([process.env.COOKIE_KEY || 'alskdjf']);
 
 export const useSession: Handle = async ({ event, resolve }) => {
-	
 	const { auth } = parse(event.request.headers.get('cookie') || '');
-	
+
 	let sessionId = '';
 	let sig = '';
 	if (auth) {
@@ -18,13 +17,12 @@ export const useSession: Handle = async ({ event, resolve }) => {
 	}
 
 	let session: Session;
-	console.log("sessionid",sessionId)
 	if (!sessionId || !keys.verify(sessionId, sig)) {
 		session = await createSession();
 	} else {
 		session = (await getSession(sessionId)) || { id: '', userId: '', username: '' };
 	}
-	console.log("session",session)
+
 	event.locals.session = session;
 	const res = await resolve(event);
 
