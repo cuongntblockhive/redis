@@ -12,9 +12,7 @@
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
 		"seed": "node ./seeds/seed.js",
 		"worker": "ts-node-dev ./worker/index.ts",
-		"cli": "node cli/index.js",
-		"sandbox": "ts-node-dev -T ./sandbox/index.ts",
-		"genid": "ts-node-dev -T ./src/services/utils/gen-id.ts"
+		"cli": "node cli/index.js"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^1.0.0-next.17",
@@ -40,7 +38,6 @@
 		"@types/ioredis": "^4.28.8",
 		"@types/keygrip": "^1.0.2",
 		"@types/luxon": "^2.0.9",
-		"axios": "^0.26.1",
 		"boxen": "^6.2.1",
 		"chart.js": "^3.7.1",
 		"chartjs-adapter-luxon": "^1.1.0",
