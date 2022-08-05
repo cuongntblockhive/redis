@@ -19,6 +19,5 @@ const run = async () => {
 
 	const commands = ['car1','car2','car3'].map(id => client.HGETALL(id))
 	const result = await Promise.all(commands)
-	console.log("result",result)
 };
 run();
