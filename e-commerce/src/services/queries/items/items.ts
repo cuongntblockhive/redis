@@ -11,11 +11,15 @@ export const getItem = async (id: string) => {
 	if(Object.keys(item).length == 0) {
 		return null
 	}
-	console.log("item",item, deserialize(id, item))
 	return deserialize(id, item)
 };
 
-export const getItems = async (ids: string[]) => { };
+export const getItems = async (ids: string[]) => {
+	const commands = ids.map(id => client.HGETALL(itemsKey(id)))
+	const result = await Promise.all(commands)
+	console.log("result",result)
+	return result;
+ };
 
 export const createItem = async (attrs: CreateItemAttrs) => {
 	const id = genId();
