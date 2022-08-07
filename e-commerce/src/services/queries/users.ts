@@ -1,9 +1,15 @@
 import type { CreateUserAttrs } from '$services/types';
 import { genId } from '$services/utils';
 import { client } from '$services/redis';
-import { usernameUniqueKey, usersKey } from '$services/keys';
+import { usernamesKey, usernameUniqueKey, usersKey } from '$services/keys';
 
 export const getUserByUsername = async (username: string) => {
+	const decId = await client.zScore(usernamesKey(), username)
+	if(!decId) {
+		throw new Error('Not found id')
+	}
+	const hexId = decId.toString(16)
+	return await getUserById(hexId)
 
 };
 
@@ -16,13 +22,16 @@ export const getUserById = async (id: string) => {
 export const createUser = async (attrs: CreateUserAttrs) => {
 	const id = genId();
 
-	const exists = await client.sIsMember(usernameUniqueKey(), attrs.username)
-	if (exists) {
+	const score = await client.zScore(usernamesKey(), attrs.username)
+	if (score) {
 		throw new Error('Username is taken')
 	}
 
 	await client.hSet(usersKey(id), serialize(attrs));
-	await client.sAdd(usernameUniqueKey(), attrs.username)
+	await client.zAdd(usernamesKey(), {
+		value: attrs.username,
+		score: parseInt(id, 16)
+	})
 	return id;
 };
 
