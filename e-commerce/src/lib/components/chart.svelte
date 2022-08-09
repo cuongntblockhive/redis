@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Chart } from 'chart.js';
+import { DateTime } from 'luxon';
 
 	type Bid = { createdAt: number; amount: number };
 
@@ -15,7 +16,7 @@
 			return;
 		}
 
-		const labels = bidHistory.map(() => '');
+		const labels = bidHistory.map(({ createdAt }) => DateTime.fromMillis(createdAt).toFormat('yyyy/MM/dd HH:mm:ss'));
 		const data = bidHistory.map(({ amount }) => amount);
 
 		if (labels.length < 9) {
