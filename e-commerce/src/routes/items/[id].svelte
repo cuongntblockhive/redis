@@ -143,7 +143,7 @@
 
 <div class="text-xl">Similar Items</div>
 <div class="flex flex-wrap gap-4 justify-center">
-	{#each similarItems as item}
+	<!-- {#each similarItems as item}
 		<Card {item} />
-	{/each}
+	{/each} -->
 </div>

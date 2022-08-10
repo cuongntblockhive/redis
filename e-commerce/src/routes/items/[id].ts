@@ -23,7 +23,6 @@ export const get: RequestHandler<Params, any> = async ({ params, locals }) => {
 	await incrementView(item.id, locals.session.userId);
 	const userLikes = await userLikesItem(item.id, locals.session.userId);
 	const history = await getBidHistory(item.id);
-	console.log("history after bid", history)
 	const similarItems = await getSimilarItems(item.id);
 	const userHasHighBid = item.highestBidUserId === locals.session.userId;
 	return {

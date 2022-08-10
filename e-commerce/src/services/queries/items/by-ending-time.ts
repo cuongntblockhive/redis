@@ -1,6 +1,5 @@
 import { itemsByEndingAtKey } from "$services/keys";
 import { client } from "$services/redis";
-import { DateTime } from "luxon";
 import { getItems } from "./items";
 
 export const itemsByEndingTime = async (
