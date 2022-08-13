@@ -14,3 +14,5 @@ export const itemsViewsKey = (itemId: string) => `item:views#${itemId}`; // Hype
 export const itemsByPricesKey = () => 'items:price'; // Sorted set [itemId, price]
 // Bids
 export const bidHistoryKey = (itemId: string) => `history#${itemId}`; // List [createdAt:amount]
+// Keys
+export const locksKey = (key: string) => `lock:${key}`
